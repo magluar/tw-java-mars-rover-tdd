@@ -1,5 +1,9 @@
 package com.afs.tdd;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MarsRover {
     private RoverStatus roverStatus;
 
@@ -8,6 +12,9 @@ public class MarsRover {
     }
 
     public void executeCommand(String command) {
+        if(command.length() > 1){
+            executeCommands(command);
+        }
         if (command.equals("M")){
             move();
         }
@@ -17,6 +24,11 @@ public class MarsRover {
         if (command.equals("R")){
             turnRight();
         }
+    }
+
+    private void executeCommands(String command) {
+        List<String> commands = Arrays.asList(command.split(""));
+        commands.forEach(toExecute -> executeCommand(String.valueOf(toExecute)));
     }
 
     private void turnRight() {
